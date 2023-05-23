@@ -1,19 +1,25 @@
-import cv2
+import cv2 as cv
 print("Open CV")
 
-img = cv2.imread('media/Certificate.jpg',-1) #-1 original, 0 b&w, 1 Transparent 
-#img = cv2.resize(img,(400, 400))
-img = cv2.resize(img,(0, 0),fx=0.7, fy=0.5)
-img = cv2.rotate(img,cv2.ROTATE_90_CLOCKWISE)
-cv2.imwrite("media/New_Certificate.png",img)
-print(type(img))
-print(img)
-print("here",img.shape[0])
+img = cv.imread('media/Certificate.jpg') #-1 original, 0 b&w, 1 Transparent 
+#img = cv.resize(img,(400, 400))
+# img = cv.resize(img,(0, 0),fx=0.7, fy=0.5)
+# img = cv.rotate(img,cv.ROTATE_90_CLOCKWISE)
+# cv.imwrite("media/New_Certificate.png",img)
+# print(type(img))
+# print(img)
+# print("here",img.shape[0])
+# print(img[0][10:15])
+cv.imshow("Image", img)
+cv.waitKey(0)
 
-print(img[0][10:15])
+capture = cv.VideoCapture('media/1.1.mp4')
+while True:
+    isTrue, frame = capture.read()
+    cv.imshow('Video', frame)
 
+    if cv.waitKey(20) & 0xFF == ord('d'):
+        break
+capture.release()
 
-
-cv2.imshow("Image", img)
-cv2.waitKey(0)
-cv2.destroyAllWindows
+cv.destroyAllWindows
